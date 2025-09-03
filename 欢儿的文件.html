@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豆包的护眼小助手✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Comic Sans MS", "幼圆", sans-serif;
+        }
+        body {
+            background-color: #f9f3f6;
+            color: #5a3e36;
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            background-color: #ffd6e0;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #e66465;
+        }
+        .header p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .timer-box {
+            background-color: #e8f4c9;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #timer {
+            font-size: 36px;
+            font-weight: bold;
+            color: #66bb6a;
+            margin: 15px 0;
+            animation: flash 1s infinite alternate;
+        }
+        @keyframes flash {
+            from { opacity: 0.8; }
+            to { opacity: 1; transform: scale(1.05); }
+        }
+        .btn {
+            background-color: #ff9a8b;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background-color: #ff6b5b;
+            transform: scale(1.1);
+        }
+        .eye-exercise {
+            background-color: #c8e6c9;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .exercise-step {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .exercise-step span {
+            font-size: 18px;
+        }
+        .cartoon-character {
+            font-size: 40px;
+            animation: move 2s infinite alternate;
+        }
+        @keyframes move {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        .eye-tips {
+            background-color: #bbdefb;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .tip-item {
+            margin: 12px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .stickers {
+            margin: 20px 0;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部标题区 -->
+    <div class="header">
+        <h1>👀 豆包的护眼小助手来啦！</h1>
+        <p>亲爱的小伙伴，长时间看电脑会让眼睛累哦～跟着我一起定时休息，保护明亮大眼睛吧！💖</p >
+    </div>
+
+    <!-- 定时提醒区 -->
+    <div class="timer-box">
+        <h2>⏰ 当前使用电脑时间</h2>
+        <div id="timer">20:00</div>
+        <p>建议每20分钟休息20秒，眺望20英尺（约6米）外的物体哦～</p >
+        <button class="btn" id="startBtn">开始计时 🚀</button>
+        <button class="btn" id="resetBtn">重置计时 🔄</button>
+        <button class="btn" id="restBtn">立即休息 🛋️</button>
+    </div>
+
+    <!-- 眼保健操区 -->
+    <div class="eye-exercise">
+        <h2>🧘 一起做眼保健操吧！</h2>
+        <div class="exercise-step">
+            <div class="cartoon-character">🙆</div>
+            <span>1. 揉天应穴：用指腹轻揉眉毛内侧尽头（5秒/次，共10次）</span>
+        </div>
+        <div class="exercise-step">
+            <div class="cartoon-character">🙅</div>
+            <span>2. 挤按睛明穴：轻按鼻梁两侧靠近眼角处（5秒/次，共10次）</span>
+        </div>
+        <div class="exercise-step">
+            <div class="cartoon-character">🙇</div>
+            <span>3. 揉四白穴：轻揉瞳孔正下方，眼眶骨凹陷处（5秒/次，共10次）</span>
+        </div>
+        <div class="exercise-step">
+            <div class="cartoon-character">💆</div>
+            <span>4. 按太阳穴、轮刮眼眶：按揉太阳穴后，从眼角刮到眼尾（重复10圈）</span>
+        </div>
+    </div>
+
+    <!-- 护眼小知识区 -->
+    <div class="eye-tips">
+        <h2>📚 豆包的护眼小妙招</h2>
+        <div class="tip-item">
+            <span>💧 每天喝够8杯水，保持眼睛湿润不干燥</span>
+        </div>
+        <div class="tip-item">
+            <span>🌱 电脑旁放一盆多肉或仙人掌，减少屏幕辐射</span>
+        </div>
+        <div class="tip-item">
+            <span>💡 调整屏幕亮度：和环境光差不多，不刺眼也不昏暗</span>
+        </div>
+        <div class="tip-item">
+            <span>😴 保证每天8小时睡眠，让眼睛充分休息恢复活力</span>
+        </div>
+        <div class="tip-item">
+            <span>🥕 多吃胡萝卜、蓝莓、鸡蛋，补充维生素保护视力</span>
+        </div>
+    </div>
+
+    <!-- 可爱贴画区 -->
+    <div class="stickers">
+        <span>🌟</span>
+        <span>🌈</span>
+        <span>🐰</span>
+        <span>🌸</span>
+        <span>🍓</span>
+        <span>☁️</span>
+    </div>
+
+    <script>
+        // 计时功能
+        let timerInterval;
+        let minutes = 0;
+        let seconds = 0;
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const restBtn = document.getElementById('restBtn');
+
+        // 更新计时器显示
+        function updateTimer() {
+            seconds++;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+            }
+            const formattedMin = minutes.toString().padStart(2, '0');
+            const formattedSec = seconds.toString().padStart(2, '0');
+            timerDisplay.textContent = `${formattedMin}:${formattedSec}`;
+
+            // 每20分钟提醒休息
+            if (minutes === 20 && seconds === 0) {
+                alert('⚠️ 时间到啦！快停下电脑，眺望6米外的物体20秒，做个眼保健操吧～👀');
+                // 播放可爱动画（这里用字符动画模拟）
+                const character = document.querySelector('.cartoon-character');
+                character.style.animation = 'move 0.5s infinite alternate';
+                setTimeout(() => {
+                    character.style.animation = 'move 2s infinite alternate';
+                }, 5000);
+            }
+        }
+
+        // 开始计时
+        startBtn.addEventListener('click', () => {
+            if (!timerInterval) {
+                timerInterval = setInterval(updateTimer, 1000);
+                startBtn.textContent = '暂停计时 ⏸️';
+            } else {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                startBtn.textContent = '继续计时 ▶️';
+            }
+        });
+
+        // 重置计时
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            minutes = 0;
+            seconds = 0;
+            timerDisplay.textContent = '00:00';
+            startBtn.textContent = '开始计时 🚀';
+        });
+
+        // 立即休息
+        restBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            minutes = 0;
+            seconds = 0;
+            timerDisplay.textContent = '00:00';
+            startBtn.textContent = '开始计时 🚀';
+            alert('🥳 休息时间到！快站起来活动活动，看看窗外的风景，让眼睛放松一下吧～');
+        });
+
+        // 页面加载时的欢迎动画
+        window.addEventListener('load', () => {
+            const stickers = document.querySelectorAll('.stickers span');
+            stickers.forEach((sticker, index) => {
+                setTimeout(() => {
+                    sticker.style.transform = 'scale(1.5)';
+                    setTimeout(() => {
+                        sticker.style.transform = 'scale(1)';
+                    }, 500);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
