@@ -1,0 +1,593 @@
+[index (2).html](https://github.com/user-attachments/files/22203808/index.2.html)
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悄悄话小天地 💖🦊</title>
+    <style>
+        body {
+            background-color: #fbe6f0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: #ff66b2;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .message-board {
+            padding: 15px;
+            border-radius: 15px;
+            background-color: #ffe6f2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-board h2 {
+            color: #ff66b2;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .message-board input,
+        .message-board textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #ff66b2;
+            margin: 8px 0;
+            font-size: 16px;
+            background-color: #ffe6f2;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .message-board textarea {
+            height: 120px;
+            resize: none;
+        }
+        
+        .button {
+            background-color: #ff66b2;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-weight: bold;
+        }
+        
+        .button:hover {
+            background-color: #ff3385;
+            transform: scale(1.05);
+        }
+        
+        .button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .chat-box {
+            margin-top: 20px;
+            padding: 10px;
+            width: 90%;
+            height: 300px;
+            overflow-y: auto;
+            border: 2px solid #ff66b2;
+            border-radius: 10px;
+            background-color: #ffffff;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background-color: #ffccff;
+            font-size: 1rem;
+            color: #333;
+            animation: slideInUp 0.3s ease-out;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .message-username {
+            font-weight: bold;
+            color: #ff66b2;
+        }
+        
+        .message-time {
+            font-size: 0.8rem;
+            color: #888;
+            background-color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        
+        .delete-btn {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.2s ease;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .delete-btn:hover {
+            background-color: #cc0044;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+        }
+        
+        .empty-state .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ff66b2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff66b2;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideInRight 0.3s ease-out;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .toast.error {
+            background-color: #ff3366;
+        }
+        
+        .toast.success {
+            background-color: #4CAF50;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .config-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: #856404;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .chat-box {
+                width: 95%;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>悄悄话小天地 💖🦊</h1>
+    <p class="subtitle">分享你的小秘密和美好心情</p>
+    
+    <div class="container">
+        <div class="message-board">
+            <h2>留下你的悄悄话吧！💌</h2>
+            <input type="text" placeholder="你的名字" id="username">
+            <textarea placeholder="写下你的悄悄话... ✨" id="message"></textarea>
+            <button class="button" onclick="submitMessage()" id="submitBtn">发送 💬</button>
+        </div>
+    </div>
+
+    <div class="chat-box" id="chat-box">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            正在加载留言中... ⏳
+        </div>
+    </div>
+
+    <script>
+        // JSONBin.io 配置 - 请替换为您自己的 API KEY 和 BIN ID
+        const BIN_ID = '68be6b81ae596e708fe665a4'; // 替换为您的 Bin ID
+        const API_KEY = '$2a$10$YFPRzW6Mri/bggVqGaf..eKFhThlqAfTc1vtm3hSJmkxMuLJnJTeC'; // 替换为您的 API Master Key
+        const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+        // 显示提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100px)';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // 加载所有留言
+        async function loadMessages() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': API_KEY,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.record.messages || [];
+            } catch (error) {
+                console.error('加载留言失败:', error);
+                showToast('加载留言失败，请检查网络连接 ❌', 'error');
+                return [];
+            }
+        }
+
+        // 保存所有留言
+        async function saveMessages(messages) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'X-Master-Key': API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ messages })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                return true;
+            } catch (error) {
+                console.error('保存留言失败:', error);
+                showToast('保存失败，请重试 ❌', 'error');
+                return false;
+            }
+        }
+
+        // 发送悄悄话
+        async function submitMessage() {
+            const usernameEl = document.getElementById('username');
+            const messageEl = document.getElementById('message');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            const username = usernameEl.value.trim();
+            const message = messageEl.value.trim();
+
+            // 验证输入
+            if (!username || !message) {
+                showToast('请填写名字和悄悄话！⚠️', 'error');
+                return;
+            }
+
+            if (username.length > 20) {
+                showToast('名字不能超过20个字符！⚠️', 'error');
+                return;
+            }
+
+            if (message.length > 200) {
+                showToast('悄悄话不能超过200个字符！⚠️', 'error');
+                return;
+            }
+
+            // 显示发送中状态
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '发送中... ⏳';
+            
+            // 显示加载状态
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    正在发送中... ⏳
+                </div>
+            `;
+
+            try {
+                // 加载现有留言
+                const allMessages = await loadMessages();
+                
+                // 添加新留言
+                const newMessage = {
+                    id: Date.now(), // 使用时间戳作为唯一ID
+                    username,
+                    message,
+                    time: new Date().toLocaleString('zh-CN')
+                };
+                
+                allMessages.push(newMessage);
+                
+                // 保存到云端
+                const success = await saveMessages(allMessages);
+                
+                if (success) {
+                    // 清空输入框
+                    usernameEl.value = '';
+                    messageEl.value = '';
+                    // 显示成功消息
+                    showToast('发送成功！✅');
+                    // 更新显示
+                    await displayMessages();
+                } else {
+                    // 发送失败，恢复显示
+                    await displayMessages();
+                }
+            } catch (error) {
+                console.error('发送消息失败:', error);
+                showToast('发送失败，请重试！❌', 'error');
+                await displayMessages();
+            } finally {
+                // 恢复按钮状态
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '发送 💬';
+            }
+        }
+
+        // 删除留言
+        async function deleteMessage(messageId) {
+            if (!confirm('确定要删除这条悄悄话吗？删除后无法恢复哦！')) {
+                return;
+            }
+
+            try {
+                // 显示删除中状态
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML = `
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        正在删除中... ⏳
+                    </div>
+                `;
+
+                // 加载现有留言
+                const allMessages = await loadMessages();
+                
+                // 过滤掉要删除的留言
+                const filteredMessages = allMessages.filter(msg => msg.id !== messageId);
+                
+                // 保存到云端
+                const success = await saveMessages(filteredMessages);
+                
+                if (success) {
+                    showToast('删除成功！✅');
+                }
+                
+                // 更新显示（无论成功失败都刷新）
+                await displayMessages();
+            } catch (error) {
+                console.error('删除消息失败:', error);
+                showToast('删除失败，请重试！❌', 'error');
+                await displayMessages();
+            }
+        }
+
+        // 获取相对时间
+        function getRelativeTime(timeString) {
+            const now = new Date();
+            const messageTime = new Date(timeString);
+            const diffInSeconds = Math.floor((now.getTime() - messageTime.getTime()) / 1000);
+            
+            if (diffInSeconds < 60) {
+                return '刚刚';
+            } else if (diffInSeconds < 3600) {
+                return `${Math.floor(diffInSeconds / 60)}分钟前`;
+            } else if (diffInSeconds < 86400) {
+                return `${Math.floor(diffInSeconds / 3600)}小时前`;
+            } else {
+                return messageTime.toLocaleDateString('zh-CN');
+            }
+        }
+
+        // 显示所有留言
+        async function displayMessages() {
+            const chatBox = document.getElementById('chat-box');
+            
+            try {
+                const messages = await loadMessages();
+                
+                if (messages.length === 0) {
+                    chatBox.innerHTML = `
+                        <div class="empty-state">
+                            <div class="emoji">🦊</div>
+                            <p>还没有悄悄话，快来第一个留言吧！✨</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // 按时间倒序排列
+                const sortedMessages = [...messages].reverse();
+                
+                chatBox.innerHTML = '';
+                sortedMessages.forEach(msg => {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('message');
+                    messageElement.innerHTML = `
+                        <div class="message-header">
+                            <span class="message-username">${escapeHtml(msg.username)} 🦊</span>
+                            <span class="message-time">${msg.time}</span>
+                        </div>
+                        <p>${escapeHtml(msg.message)} 💖</p>
+                        <button class="delete-btn" onclick="deleteMessage(${msg.id})">删除</button>
+                    `;
+                    chatBox.appendChild(messageElement);
+                });
+            } catch (error) {
+                console.error('显示消息失败:', error);
+                chatBox.innerHTML = `
+                    <div class="empty-state">
+                        <div class="emoji">❌</div>
+                        <p>加载失败，请检查网络连接或稍后重试</p>
+                    </div>
+                `;
+            }
+        }
+
+        // HTML 转义函数
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        // 页面加载时初始化
+        async function initialize() {
+            // 检查 API 配置
+            if (BIN_ID === '你的BIN_ID' || API_KEY === '$2b$10$你的API_KEY') {
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML = `
+                    <div class="config-note">
+                        <strong>⚠️ 配置提醒：</strong><br>
+                        请先配置您的 JSONBin.io API 密钥和 Bin ID：<br>
+                        1. 在脚本顶部找到 BIN_ID 和 API_KEY 变量<br>
+                        2. 替换为您在 JSONBin.io 获得的真实值<br>
+                        3. 刷新页面即可开始使用
+                    </div>
+                `;
+                return;
+            }
+
+            // 显示加载状态
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    正在加载留言中... ⏳
+                </div>
+            `;
+            
+            // 加载消息
+            await displayMessages();
+        }
+
+        // 添加回车键提交功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageTextarea = document.getElementById('message');
+            if (messageTextarea) {
+                messageTextarea.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        submitMessage();
+                    }
+                });
+            }
+        });
+
+        // 启动应用
+        initialize();
+    </script>
+</body>
+</html>
